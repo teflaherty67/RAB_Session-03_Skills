@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command RAB_Session-03_Skills</Text>
+    <Description>Some description for RAB_Session-03_Skills</Description>
+    <Assembly>RAB_Session-03_Skills.dll</Assembly>
+    <FullClassName>RAB_Session_03_Skills.Command</FullClassName>
+    <ClientId>eb6ab36c-c4c6-4e51-8d52-7ef1a6efc8cd</ClientId>
+    <VendorId>T Edward</VendorId>
+    <VendorDescription>T Edward Coder</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>Application RAB_Session-03_Skills</Name>
+    <Assembly>RAB_Session-03_Skills.dll</Assembly>
+    <FullClassName>RAB_Session_03_Skills.App</FullClassName>
+    <ClientId>d3d8e5ff-f44c-4fc6-a8a3-3a8d0818898b</ClientId>
+    <VendorId>T Edward</VendorId>
+    <VendorDescription>T Edward Coder</VendorDescription>
+  </AddIn>
+</RevitAddIns>
