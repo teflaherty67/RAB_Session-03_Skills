@@ -65,9 +65,8 @@ namespace RAB_Session_03_Skills
             FilteredElementCollector colVFT = new FilteredElementCollector(doc);
             colVFT.OfClass(typeof(ViewFamilyType));
 
-            FilteredElementCollector colTBlocks = new FilteredElementCollector(doc);
-            colTBlocks.OfCategory(BuiltInCategory.OST_TitleBlocks);
-            ElementId tBlockId = colTBlocks.FirstElementId();
+            Element tBlock = GetTitleBlockByName(doc, "E1 30x42 Horizontal");
+            ElementId tBlockId = tBlock.Id;
 
             ViewFamilyType planVFT = null;
             ViewFamilyType rcpVFT = null;
@@ -101,6 +100,27 @@ namespace RAB_Session_03_Skills
             t.Dispose();
 
             return Result.Succeeded;
+        }
+
+        internal double ConvertMetersToFeet(double meters)
+        {
+            double feet = meters * 3.28084;
+
+            return feet;
+        }
+
+        internal Element GetTitleBlockByName(Document doc, string name)
+        {
+            FilteredElementCollector colTBlocks = new FilteredElementCollector(doc);
+            colTBlocks.OfCategory(BuiltInCategory.OST_TitleBlocks);
+
+            foreach(Element curTBlock in colTBlocks)
+            {
+                if (curTBlock.Name == name)
+                return curTBlock;
+            }
+
+            return null;
         }
 
         struct myStruct
