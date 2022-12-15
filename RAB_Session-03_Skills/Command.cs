@@ -65,6 +65,10 @@ namespace RAB_Session_03_Skills
             FilteredElementCollector colVFT = new FilteredElementCollector(doc);
             colVFT.OfClass(typeof(ViewFamilyType));
 
+            FilteredElementCollector colTBlocks = new FilteredElementCollector(doc);
+            colTBlocks.OfCategory(BuiltInCategory.OST_TitleBlocks);
+            ElementId tBlockId = colTBlocks.FirstElementId();
+
             ViewFamilyType planVFT = null;
             ViewFamilyType rcpVFT = null;
 
@@ -84,6 +88,14 @@ namespace RAB_Session_03_Skills
 
             ViewPlan newPlanView = ViewPlan.Create(doc, planVFT.Id, newLevel.Id);
             ViewPlan newRCPView = ViewPlan.Create(doc, rcpVFT.Id, newLevel.Id);
+
+            ViewSheet newPlanSheet = ViewSheet.Create(doc, tBlockId);
+            ViewSheet newRCPSheet = ViewSheet.Create(doc, tBlockId);
+
+            XYZ insPoint = new XYZ(1, 1, 0);
+            XYZ insPoint2 = new XYZ(2, 1, 0);
+            Viewport newPlanViewPort = Viewport.Create(doc, newPlanSheet.Id, newPlanView.Id, insPoint);
+            Viewport newRCPiewPort = Viewport.Create(doc, newPlanSheet.Id, newRCPView.Id, insPoint2);
 
             t.Commit();
             t.Dispose();
