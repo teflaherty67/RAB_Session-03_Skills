@@ -26,9 +26,39 @@ namespace RAB_Session_03_Skills
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
+            // setup open file dialog
 
+            Forms.OpenFileDialog selectFile = new Forms.OpenFileDialog();
+            selectFile.InitialDirectory = @"C:\";
+            selectFile.Filter = "CSV file|*.csv|All files|*.*";
+            selectFile.Multiselect = false;
+
+            // open file dialog
+
+            string fileName = "";
+            if(selectFile.ShowDialog() == Forms.DialogResult.OK)
+            {
+                fileName = selectFile.FileName;
+            }
+
+            if(fileName != "")
+            {
+                // do something with the file
+            }
+
+            myStruct struct1 = new myStruct();
+            struct1.Name = "test name";
+            struct1.Description = "this is a description";
+            struct1.Distance = 100;
 
             return Result.Succeeded;
+        }
+
+        struct myStruct
+        {
+            public string Name;
+            public string Description;
+            public double Distance;
         }
     }
 }
