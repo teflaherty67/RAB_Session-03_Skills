@@ -51,6 +51,43 @@ namespace RAB_Session_03_Skills
             struct1.Description = "this is a description";
             struct1.Distance = 100;
 
+            myStruct struct2 = new myStruct("test name 2", "descripion 2", 200);
+
+            List<myStruct> myList = new List<myStruct>();
+            myList.Add(struct1);
+            myList.Add(struct2);
+
+            foreach(myStruct curStruct in myList)
+            {
+                Debug.Print(curStruct.Name);
+            }
+
+            FilteredElementCollector colVFT = new FilteredElementCollector(doc);
+            colVFT.OfClass(typeof(ViewFamilyType));
+
+            ViewFamilyType planVFT = null;
+            ViewFamilyType rcpVFT = null;
+
+            foreach(ViewFamilyType curVFT in colVFT)
+            {
+                if (curVFT.ViewFamily == ViewFamily.FloorPlan)
+                    planVFT = curVFT;
+
+                if(curVFT.ViewFamily == ViewFamily.CeilingPlan)
+                    rcpVFT = curVFT;
+            }
+
+            Transaction t = new Transaction(doc);
+            t.Start("Create some stuff");
+
+            Level newLevel = Level.Create(doc, 20);
+
+            ViewPlan newPlanView = ViewPlan.Create(doc, planVFT.Id, newLevel.Id);
+            ViewPlan newRCPView = ViewPlan.Create(doc, rcpVFT.Id, newLevel.Id);
+
+            t.Commit();
+            t.Dispose();
+
             return Result.Succeeded;
         }
 
@@ -59,6 +96,13 @@ namespace RAB_Session_03_Skills
             public string Name;
             public string Description;
             public double Distance;
+
+            public myStruct(string name, string description, double dist)
+            {
+                Name = name;
+                Description = description;
+                Distance = dist;
+            }
         }
     }
 }
